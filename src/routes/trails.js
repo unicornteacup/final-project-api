@@ -22,5 +22,27 @@ module.exports = db => {
     });
   });
 
+
+    router.get("/passes", (request, response) => {
+      db.query(
+        `
+        SELECT
+          passes.id,
+          passes.pass_duration AS pass_duration,
+          passes.description AS description,
+          trails.status AS status,
+          trails.warning AS warning,
+          array_agg(DISTINCT passes.id) AS passes,
+        FROM passes
+        JOIN trails ON trails_id = trails.id
+        GROUP BY passes.id
+        ORDER BY passes.id
+      `
+      ).then(({ rows: trails }) => {
+        response.json(trails);
+      });
+    });
+
+
   return router;
 };

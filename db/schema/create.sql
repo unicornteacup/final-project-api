@@ -49,7 +49,7 @@ CREATE TABLE pass_entries (
   visitor_id INTEGER REFERENCES visitors(id) ON DELETE CASCADE
 );
 
-CREATE TABLE available_interviewers (
+CREATE TABLE pass_guests (
   id SERIAL PRIMARY KEY NOT NULL,
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,

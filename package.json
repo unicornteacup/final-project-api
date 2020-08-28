@@ -1,0 +1,23 @@
+{
+  "name": "final-project-api",
+  "version": "1.0.0",
+  "description": "A boilerplate project for anyone interested in making a project that uses React and Express.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/unicornteacup/final-project-api.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unicornteacup/final-project-api/issues"
+  },
+  "homepage": "https://github.com/unicornteacup/final-project-api#readme",
+  "dependencies": {
+    "file-system": "^2.2.2",
+    "random-email": "^1.0.3"
+  }
+}

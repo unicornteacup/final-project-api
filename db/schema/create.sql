@@ -1,6 +1,5 @@
 DROP TABLE IF EXISTS parks CASCADE;
 DROP TABLE IF EXISTS trails CASCADE;
-DROP TABLE IF EXISTS passes CASCADE;
 DROP TABLE IF EXISTS visitors CASCADE;
 DROP TABLE IF EXISTS pass_entries CASCADE;
 DROP TABLE IF EXISTS guests CASCADE;
@@ -20,15 +19,11 @@ CREATE TABLE trails (
   description TEXT,
   status VARCHAR(255) NOT NULL,
   warning TEXT,
-  park_id INTEGER REFERENCES parks(id) ON DELETE CASCADE
-);
-
-CREATE TABLE passes (
-  id SERIAL PRIMARY KEY NOT NULL,
   pass_duration VARCHAR(255) NOT NULL,
   max_capacity INTEGER NOT NULL,
-  trail_id INTEGER REFERENCES trails(id) ON DELETE CASCADE
+  park_id INTEGER REFERENCES parks(id) ON DELETE CASCADE,
 );
+
 
 CREATE TABLE visitors (
   id SERIAL PRIMARY KEY NOT NULL,
@@ -41,19 +36,15 @@ CREATE TABLE visitors (
 
 CREATE TABLE pass_entries (
   id SERIAL PRIMARY KEY NOT NULL,
-  number_in_party INTEGER NOT NULL,
   date DATE NOT NULL,
   status VARCHAR(255) NOT NULL,
-  max_capacity INTEGER NOT NULL,
-  trail_id INTEGER REFERENCES trails(id) ON DELETE CASCADE,
   visitor_id INTEGER REFERENCES visitors(id) ON DELETE CASCADE
 );
 
-CREATE TABLE pass_guests (
+CREATE TABLE guests (
   id SERIAL PRIMARY KEY NOT NULL,
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,
   phone VARCHAR(255) NOT NULL,
-  day_id INTEGER REFERENCES days(id) ON DELETE CASCADE,
-  pass_entry_id INTEGER REFERENCES pass_entries(id) ON DELETE CASCADE
+  entry_id INTEGER REFERENCES pass_entries(id) ON DELETE CASCADE
 );

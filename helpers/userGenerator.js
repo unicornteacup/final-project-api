@@ -29,8 +29,8 @@ userSeedsGenerator = (times) => {
 
 
     let user = `
-      INSERT INTO visitors (first_name, last_name, phone, email_address, password) 
-      VALUES (${names[randomIndex]}, ${names[randomIndex + 5]}, ${phoneNumberGenerator(phoneNumbers)}, ${randomEmail()}, password );`
+    INSERT INTO visitors (first_name, last_name, phone, email, password) 
+    VALUES ('${names[randomIndex]}', '${names[randomIndex + 5]}', '${phoneNumberGenerator(phoneNumbers)}', '${randomEmail()}', 'password');`
     array += user;
     num++;
   }

@@ -19,7 +19,6 @@ CREATE TABLE trails (
   description TEXT,
   status VARCHAR(255) NOT NULL,
   warning TEXT,
-  pass_duration VARCHAR(255) NOT NULL,
   max_capacity INTEGER NOT NULL,
   park_id INTEGER REFERENCES parks(id) ON DELETE CASCADE,
 );

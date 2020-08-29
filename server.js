@@ -3,7 +3,7 @@ const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
 
-const ENV        = process.env.ENV || "development";
+const ENV  = process.env.ENV || "development";
 const PORT = 8080;
 
 
@@ -45,7 +45,7 @@ App.get('/', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
-// geting routes
+// getting routes
 
 const parksRoutes = require('./routes/parks');
 //const parkRoute = require('./routes/park');

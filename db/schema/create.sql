@@ -23,7 +23,6 @@ CREATE TABLE trails (
   park_id INTEGER REFERENCES parks(id) ON DELETE CASCADE,
 );
 
-
 CREATE TABLE visitors (
   id SERIAL PRIMARY KEY NOT NULL,
   first_name VARCHAR(255) NOT NULL,

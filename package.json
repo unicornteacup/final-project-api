@@ -1,23 +1,19 @@
 {
-  "name": "final-project-api",
+  "name": "express-back-end",
   "version": "1.0.0",
-  "description": "A boilerplate project for anyone interested in making a project that uses React and Express.",
-  "main": "index.js",
+  "description": "Boilerplate for the Express backend in an Express-React project",
+  "main": "server.js",
+  "author": "garrettgsb",
+  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "go": "nodemon server.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/unicornteacup/final-project-api.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/unicornteacup/final-project-api/issues"
-  },
-  "homepage": "https://github.com/unicornteacup/final-project-api#readme",
   "dependencies": {
-    "file-system": "^2.2.2",
-    "random-email": "^1.0.3"
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "nodemon": "^1.18.7",
+    "pg": "^6.4.2",
+    "dotenv": "^2.0.0",
+    "pg-native": "^3.0.0"
   }
 }

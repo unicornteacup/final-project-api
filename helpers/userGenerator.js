@@ -29,15 +29,15 @@ userSeedsGenerator = (times) => {
 
 
     let user = `
-      INSERT INTO users (first_name, last_name, phone, email_address, password) 
-      VALUES (${names[randomIndex]}, ${names[randomIndex + 5]}, ${phoneNumberGenerator(phoneNumbers)}, ${randomEmail()}, password )`
-    array.push(user);
+      INSERT INTO visitors (first_name, last_name, phone, email_address, password) 
+      VALUES (${names[randomIndex]}, ${names[randomIndex + 5]}, ${phoneNumberGenerator(phoneNumbers)}, ${randomEmail()}, password );`
+    array += user;
     num++;
   }
   return array
 }
 
-fs.writeFile('./final-project-api/db/seeds/users.sql', userSeedsGenerator(100), (err) => {
+fs.writeFile('./db/seeds/visitors.sql', userSeedsGenerator(1000), (err) => {
   if (err) throw err;
   console.log('The file has been saved!');
 });

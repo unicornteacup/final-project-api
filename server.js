@@ -1,4 +1,4 @@
-require('dotenv').config();
+
 const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
@@ -25,16 +25,6 @@ if (process.env.DATABASE_URL) {
 const db = new Pool(dbParams);
 db.connect();
 
-// db
-//   .query(`SELECT *
-//   FROM parks
-//   JOIN trails ON park_id = parks.id
-//   WHERE parks.id = 3;`)
-//   .then(res => console.log(res.rows))
-//   .catch(err => console.error('Error executing query', err.stack))
-
-
-
 // Express Configuration
 App.use(BodyParser.urlencoded({ extended: false }));
 App.use(BodyParser.json());
@@ -45,21 +35,24 @@ App.get('/', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
+
+// Sample GET route
+App.get('/api/data', (req, res) => res.json({
+  message: "Seems to work!",
+}));
+
 // getting routes
 
-const parksRoutes = require('./routes/parks');
+// const parksRoutes = require('./routes/parks');
 //const parkRoute = require('./routes/park');
 //const passesRoutes = require('./routes/')
-const trailsRoutes = require('./routes/trail');
-const visitorsRoutes = require('./routes/users');
+// const trailsRoutes = require('./routes/trail');
+// const visitorsRoutes = require('./routes/users');
 
-App.use(parksRoutes(db));
-App.use(parkRoute(db));
-App.use(trailsRoutes(db));
-App.use(visitorsRoutes(db));
-
-
-
+// App.use(parksRoutes(db));
+// App.use(parkRoute(db));
+// App.use(trailsRoutes(db));
+// App.use(visitorsRoutes(db));
 
 App.listen(PORT, () => {
   // eslint-disable-next-line no-console

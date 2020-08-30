@@ -19,8 +19,6 @@ module.exports = db => {
     });
   });
 
-  const router = require("express").Router();
-
   module.exports = db => {
     router.get("/parks/:id", (request, response) => {
       db.query(
@@ -42,18 +40,7 @@ module.exports = db => {
         response.json(parks);
       });
     });
-  
-    return router;
   };
-
-
-
-
-
-
-
-
-
-
+  
   return router;
 };

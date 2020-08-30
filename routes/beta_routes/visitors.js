@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/users", (req, res) => {
+  router.get("/users", (request, response)=> {
     let query = `
     SELECT *
     FROM visitors
@@ -12,11 +12,13 @@ module.exports = (db) => {
         const users = data.rows;
         res.json({ users });
       })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
+
+      // .catch(err => {
+      //   res
+      //     .status(500)
+      //     .json({ error: err.message });
+      // });
+
   });
 
   return router;

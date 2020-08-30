@@ -1,13 +1,13 @@
 
+require('dotenv').config()
+
 const Express = require('express');
 const App = Express();
 const BodyParser = require('body-parser');
-
 const ENV  = process.env.ENV || "development";
 const PORT = 8080;
-
-
 const { Pool } = require('pg');
+
 
 let dbParams = {};
 if (process.env.DATABASE_URL) {
@@ -21,6 +21,7 @@ if (process.env.DATABASE_URL) {
     database: process.env.DB_NAME
   };
 }
+console.log('dbParams',dbParams);
 
 const db = new Pool(dbParams);
 db.connect();
@@ -38,13 +39,13 @@ App.get('/', (req, res) => res.json({
 
 // getting routes
 
-// const parksRoutes = require('./routes/parks');
+const parksRoutes = require('./routes/parks');
 //const parkRoute = require('./routes/park');
 //const passesRoutes = require('./routes/')
 // const trailsRoutes = require('./routes/trail');
 // const visitorsRoutes = require('./routes/users');
 
-// App.use(parksRoutes(db));
+App.use(parksRoutes(db));
 // App.use(parkRoute(db));
 // App.use(trailsRoutes(db));
 // App.use(visitorsRoutes(db));

@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/park", (req, res) => {
+  router.get("/park", (request, response) => {
     let query = `
     SELECT *
     FROM parks
@@ -14,11 +14,13 @@ module.exports = (db) => {
         const park = data.rows;
         res.json({ park });
       })
+
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
       });
+
   });
 
   return router;

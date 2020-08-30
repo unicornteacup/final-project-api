@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/trails", (req, res) => {
+  router.get("/trails", (request, response) => {
     let query = `
     SELECT *
     FROM trails
@@ -13,11 +13,13 @@ module.exports = (db) => {
         const trails = data.rows;
         res.json({ trails });
       })
+
       .catch(err => {
         res
           .status(500)
           .json({ error: err.message });
       });
+
   });
 
   return router;

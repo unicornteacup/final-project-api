@@ -36,11 +36,6 @@ App.get('/', (req, res) => res.json({
 }));
 
 
-// Sample GET route
-App.get('/api/data', (req, res) => res.json({
-  message: "Seems to work!",
-}));
-
 // getting routes
 
 // const parksRoutes = require('./routes/parks');

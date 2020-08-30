@@ -13,11 +13,11 @@ module.exports = (db) => {
         res.json({ users });
       })
 
-      // .catch(err => {
-      //   res
-      //     .status(500)
-      //     .json({ error: err.message });
-      // });
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
 
   });
 

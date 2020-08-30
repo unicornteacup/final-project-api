@@ -8,7 +8,6 @@ const ENV  = process.env.ENV || "development";
 const PORT = 8080;
 const { Pool } = require('pg');
 
-
 let dbParams = {};
 if (process.env.DATABASE_URL) {
   dbParams.connectionString = process.env.DATABASE_URL;
@@ -38,7 +37,6 @@ App.get('/', (req, res) => res.json({
 
 
 // getting routes
-
 const parksRoutes = require('./routes/parks');
 //const parkRoute = require('./routes/park');
 //const passesRoutes = require('./routes/')

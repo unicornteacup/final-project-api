@@ -15,7 +15,7 @@
       VALUES ('Niki', 'Nilav', '4183837314', 'vavip@veaw.homedepot', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Keegan', 'Keenan-Lee', '5797800631', 'zaj@oh.goog', 'password');
-      INSERT INTO visitors (first_name, last_name, phone, email, password) 
+      INSERT INTO visitors (first_name, last_name, phone, email, password) d
       VALUES ('Ryder', 'Rylee', '9050133840', 'viwiza@ketizmec.delivery', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Asrar', 'Athol', '2368311738', 'gulajmev@hof.swatch', 'password');

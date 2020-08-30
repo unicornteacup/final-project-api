@@ -19,6 +19,7 @@ module.exports = db => {
     .then(({ rows: parks }) => {
       response.json(parks);
     });
+
   });
 
   // module.exports = db => {

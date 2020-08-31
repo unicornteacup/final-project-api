@@ -1,6 +1,7 @@
 const router = require("express").Router();
 
 module.exports = db => {
+
   router.get("/parks", (req,res) => {
     db.query(
       `
@@ -24,26 +25,31 @@ module.exports = db => {
     });
   });
 
-  module.exports = db => {
-    router.get("/parks/:id", (request, response) => {
-      db.query(
-        `
-        SELECT
-          parks.id,
-          parks.name,
-          parks.description AS description
-          array_agg(DISTINCT parks.id) AS parks,
-          COUNT(pass_entries.id) AS count,
-        FROM parks
-        JOIN trails ON park_id = parks.id
-        GROUP BY parks.id
-        ORDER BY parks.id
+  router.get("/parks/:id", (req,res)=> {
+      
+      console.log('fire')
+      console.log('req.params.id', req.params.id)
+
+    db.query(
       `
-      ).then(({ rows: parks }) => {
-        response.json(parks);
+      SELECT   
+        parks.id, 
+        parks.name AS name,
+        parks.description AS description
+      FROM parks
+      WHERE parks.id = $1`, [req.params.id])
+
+      .then(result => {
+        res.status(200).json({park: result.rows})
+      })
+
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
       });
-    });
-  };
+
+      });
 
   return router;
 };

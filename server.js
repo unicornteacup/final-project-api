@@ -1,14 +1,14 @@
+// load .env data into process.env
 require("dotenv").config();
 
-const Express = require('express');
-const app = Express();
+// Web server config
+const express = require('express');
+const app = express();
 const BodyParser = require('body-parser');
-
 const ENV  = process.env.ENV || "development";
 const PORT = 8080;
 
 const { Pool } = require('pg');
-
 
 let dbParams = {};
 if (process.env.DATABASE_URL) {
@@ -39,7 +39,7 @@ db.connect();
 // Express Configuration
 app.use(BodyParser.urlencoded({ extended: false }));
 app.use(BodyParser.json());
-app.use(Express.static('public'));
+app.use(express.static('public'));
 
 // Sample GET route
 app.get('/', (req, res) => res.json({
@@ -57,7 +57,7 @@ const parksRoutes = require('./routes/parks');
 // const trailsRoutes = require('./routes/trail');
 // const visitorsRoutes = require('./routes/users');
 
-app.use(parksRoutes(db));
+app.use("/api",parksRoutes(db));
 // App.use(parkRoute(db));
 // App.use(trailsRoutes(db));
 // App.use(visitorsRoutes(db));

@@ -27,9 +27,6 @@ module.exports = db => {
 
   router.get("/parks/:id", (req,res)=> {
       
-      console.log('fire')
-      console.log('req.params.id', req.params.id)
-
     db.query(
       `
       SELECT   

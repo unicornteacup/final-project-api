@@ -67,7 +67,6 @@ app.use("/api/parks/",parksRoutes(db));
 // App.use(visitorsRoutes(db));
 
 
-
 //Listening Port
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console

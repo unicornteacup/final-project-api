@@ -3,7 +3,7 @@ const router  = express.Router();
 
 module.exports = db => {
 
-  router.get("/parks/:id/trails", (request, response) => {
+  router.get("/parks/:id/trails", (req, res) => {
     db.query(
       `
       SELECT
@@ -20,7 +20,7 @@ module.exports = db => {
       ORDER BY trails.id
     `
     ).then(({ rows: trails }) => {
-      response.json(trails);
+      res.json(trails);
     })
 
   })

@@ -4,10 +4,7 @@ module.exports = db => {
   router.get("/parks", (request,response) => {
     db.query(
       `
-      SELECT
-        parks.id,
-        parks.name AS name,
-        parks.description AS description,
+      SELECT *
       FROM parks
       JOIN trails ON parks_id = parks.id
       GROUP BY parks.id
@@ -36,8 +33,6 @@ module.exports = db => {
           COUNT(pass_entries.id) AS count, 
         FROM parks
         JOIN trails ON parks_id = parks.id
-        JOIN passes ON trails_id = trails.id
-        JOIN pass_entries ON pass_id = pass.id
         GROUP BY parks.id
         ORDER BY parks.id
       `

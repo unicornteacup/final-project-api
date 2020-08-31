@@ -9,14 +9,15 @@ module.exports = db => {
         visitors.id,
         visitors.first_name,
         visitors.description AS description,
-        array_agg(DISTINCT trails.id) AS trails,
       FROM visitors
-      JOIN trails ON parks_id = visitors.id
+      JOIN trails ON parks_id = parks.id
+      JOIN pass_entries ON visitor_id = visitors.id
+      JOIN guests ON entry_id = pass_entries.id
       GROUP BY visitors.id
       ORDER BY visitors.id
     `
-    ).then(({ rows: parks }) => {
-      response.json(parks);
+    ).then(({ rows: visitors }) => {
+      response.json(visitors);
     });
   });
 

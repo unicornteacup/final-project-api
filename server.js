@@ -55,14 +55,18 @@ app.get("/test", (req, res) => {
 });
 
 // Separated Routes 
+const homeRoutes = require('./routes/home');
 const parksRoutes = require('./routes/parks');
 const trailsRoutes = require('./routes/trails');
-const visitorsRoutes = require('./routes/new_entries');
+const visitorsRoutes = require('./routes/visitors');
+const passRoutes = require('./routes/pass');
 
 // Mount all routes
+app.use("/api",homeRoutes(db));
 app.use("/api",trailsRoutes(db));
 app.use("/api",parksRoutes(db));
 app.use("/api",visitorsRoutes(db));
+app.use("/api",passRoutes(db));
 
 
 //Listening Port

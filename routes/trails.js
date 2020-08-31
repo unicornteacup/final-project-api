@@ -35,7 +35,6 @@ module.exports = db => {
         WHERE trails.park_id = $1`, [req.params.id]
     )
     .then(result => {
-      console.log(result)
       res.status(200).json({trails: result.rows})
     })
     .catch(err => {

@@ -35,8 +35,8 @@ module.exports = db => {
         parks.id, 
         parks.name AS name,
         parks.description AS description
-      FROM parks
-      WHERE parks.id = $1`, [req.params.id])
+        FROM parks
+        WHERE parks.id = $1`, [req.params.id])
 
       .then(result => {
         res.status(200).json({park: result.rows})

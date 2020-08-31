@@ -2,13 +2,16 @@
 require("dotenv").config();
 
 // Web server config
-const express = require('express');
-const app = express();
+const express     = require('express');
+const app         = express();
 const BodyParser = require('body-parser');
-const ENV  = process.env.ENV || "development";
-const PORT = 8080;
+const ENV         = process.env.ENV || "development";
+const PORT       = 8080;
+const cookieSession = require('cookie-session');
 
+// PG database client/connection setup
 const { Pool } = require('pg');
+
 
 let dbParams = {};
 if (process.env.DATABASE_URL) {
@@ -24,17 +27,7 @@ if (process.env.DATABASE_URL) {
 }
 
 const db = new Pool(dbParams);
-
 db.connect();
-
-// db
-//   .query(`SELECT *
-//   FROM parks
-//   JOIN trails ON park_id = parks.id
-//   WHERE parks.id = 3;`)
-//   .then(res => console.log(res.rows))
-//   .catch(err => console.error('Error executing query', err.stack))
-
 
 // Express Configuration
 app.use(BodyParser.urlencoded({ extended: false }));
@@ -61,6 +54,18 @@ app.use("/api",parksRoutes(db));
 // App.use(parkRoute(db));
 // App.use(trailsRoutes(db));
 // App.use(visitorsRoutes(db));
+
+
+app.use(cookieSession({
+  name: 'session',
+  cookie: {maxAge: 36000000, httpOnly: false},
+  keys: ['thisismysuperlongstringtouseforcookiesessions', 'thisisasecondlongstring']
+}));
+// add req.session.user_id = user.id; to app.post login route
+
+
+
+
 
 
 app.listen(PORT, () => {

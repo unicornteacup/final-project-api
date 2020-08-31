@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/trails", (request, response) => {
+  router.get("/trail", (request, response) => {
     let query = `
     SELECT *
     FROM trails

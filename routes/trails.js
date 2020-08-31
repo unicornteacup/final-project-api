@@ -2,7 +2,8 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = db => {
-  router.get("/trails", (request, response) => {
+
+  router.get("/parks/:id/trails", (request, response) => {
     db.query(
       `
       SELECT
@@ -20,11 +21,11 @@ module.exports = db => {
     `
     ).then(({ rows: trails }) => {
       response.json(trails);
-    });
-  });
+    })
 
+  })
 
-    router.get("/passes", (request, response) => {
+    router.get("/parks/:id/trail/:id", (request, response) => {
       db.query(
         `
         SELECT

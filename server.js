@@ -1,12 +1,14 @@
-
-require('dotenv').config()
+require("dotenv").config({ path: PATH });
 
 const Express = require('express');
-const App = Express();
+const app = Express();
 const BodyParser = require('body-parser');
+
 const ENV  = process.env.ENV || "development";
 const PORT = 8080;
+
 const { Pool } = require('pg');
+
 
 let dbParams = {};
 if (process.env.DATABASE_URL) {
@@ -20,35 +22,50 @@ if (process.env.DATABASE_URL) {
     database: process.env.DB_NAME
   };
 }
-console.log('dbParams',dbParams);
 
 const db = new Pool(dbParams);
+
 db.connect();
 
+// db
+//   .query(`SELECT *
+//   FROM parks
+//   JOIN trails ON park_id = parks.id
+//   WHERE parks.id = 3;`)
+//   .then(res => console.log(res.rows))
+//   .catch(err => console.error('Error executing query', err.stack))
+
+
 // Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
-App.use(Express.static('public'));
+app.use(BodyParser.urlencoded({ extended: false }));
+app.use(BodyParser.json());
+app.use(Express.static('public'));
 
 // Sample GET route
-App.get('/', (req, res) => res.json({
+app.get('/', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
+app.get("/test", (req, res) => {
+  res.send("🤗");
+});
 
 // getting routes
+
 const parksRoutes = require('./routes/parks');
 //const parkRoute = require('./routes/park');
 //const passesRoutes = require('./routes/')
 // const trailsRoutes = require('./routes/trail');
 // const visitorsRoutes = require('./routes/users');
 
-App.use(parksRoutes(db));
+app.use(parksRoutes(db));
 // App.use(parkRoute(db));
 // App.use(trailsRoutes(db));
 // App.use(visitorsRoutes(db));
 
-App.listen(PORT, () => {
+
+app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
+

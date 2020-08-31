@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = db => {
-  router.get("/visitors", (request, response) => {
+  router.get("/parks/:id/trail/:id/new_entries", (request, response) => {
     db.query(
       `
       SELECT

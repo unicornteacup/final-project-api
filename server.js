@@ -51,7 +51,6 @@ app.get("/test", (req, res) => {
 });
 
 // getting routes
-
 const parksRoutes = require('./routes/parks');
 //const parkRoute = require('./routes/park');
 //const passesRoutes = require('./routes/')

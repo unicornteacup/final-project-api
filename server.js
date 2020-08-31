@@ -1,14 +1,13 @@
-require("dotenv").config({ path: PATH });
 
-const Express = require('express');
-const app = Express();
+const express = require('express');
+const app = express();
 const BodyParser = require('body-parser');
 
 const ENV  = process.env.ENV || "development";
 const PORT = 8080;
+require("dotenv").config();
 
 const { Pool } = require('pg');
-
 
 let dbParams = {};
 if (process.env.DATABASE_URL) {
@@ -26,7 +25,6 @@ if (process.env.DATABASE_URL) {
 const db = new Pool(dbParams);
 
 db.connect();
-
 // db
 //   .query(`SELECT *
 //   FROM parks
@@ -34,7 +32,6 @@ db.connect();
 //   WHERE parks.id = 3;`)
 //   .then(res => console.log(res.rows))
 //   .catch(err => console.error('Error executing query', err.stack))
-
 
 // Express Configuration
 app.use(BodyParser.urlencoded({ extended: false }));

@@ -56,14 +56,12 @@ app.get("/test", (req, res) => {
 
 // Separated Routes 
 const parksRoutes = require('./routes/parks');
-//const passesRoutes = require('./routes/')
-// const trailsRoutes = require('./routes/trail');
+const trailsRoutes = require('./routes/trails');
 // const visitorsRoutes = require('./routes/users');
 
 // Mount all routes
+app.use("/api",trailsRoutes(db));
 app.use("/api",parksRoutes(db));
-app.use("/api/parks/",parksRoutes(db));
-// App.use(trailsRoutes(db));
 // App.use(visitorsRoutes(db));
 
 

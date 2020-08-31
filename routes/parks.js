@@ -2,6 +2,7 @@ const router = require("express").Router();
 
 module.exports = db => {
 
+  // getting all the parks
   router.get("/parks", (req,res) => {
     db.query(
       `
@@ -25,6 +26,7 @@ module.exports = db => {
     });
   });
 
+  //getting individual park 
   router.get("/parks/:id", (req,res)=> {
       
     db.query(

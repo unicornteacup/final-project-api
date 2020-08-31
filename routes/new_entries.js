@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 module.exports = db => {
-  router.get("/parks/:id/trail/:id/new_entries", (req, res) => {
+  router.get("/new_entries", (req, res) => {
     db.query(
       `
       SELECT

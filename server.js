@@ -57,12 +57,12 @@ app.get("/test", (req, res) => {
 // Separated Routes 
 const parksRoutes = require('./routes/parks');
 const trailsRoutes = require('./routes/trails');
-// const visitorsRoutes = require('./routes/users');
+const visitorsRoutes = require('./routes/new_entries');
 
 // Mount all routes
 app.use("/api",trailsRoutes(db));
 app.use("/api",parksRoutes(db));
-// App.use(visitorsRoutes(db));
+app.use("/api",visitorsRoutes(db));
 
 
 //Listening Port

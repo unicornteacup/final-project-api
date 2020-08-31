@@ -2,8 +2,6 @@ const router = require("express").Router();
 
 module.exports = db => {
 
-  console.log('firefirefire')
-
   router.get("/trails", (req, res) => {
     db.query(
       `

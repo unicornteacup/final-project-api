@@ -5,16 +5,16 @@ userSeedsGenerator = (times) => {
   let num = 1;
   while (num < times) {
     let entry = `
-      INSERT INTO pass_entries (date, status, visitor_id) 
-      VALUES ('29-Aug-2020', 'Success', '${num}');
-      INSERT INTO pass_entries (date, status, visitor_id) 
-      VALUES ('04-Sep-2020', 'Declined', '${num}');
-      INSERT INTO pass_entries (date, status, visitor_id) 
-      VALUES ('13-Sep-2020', 'Success', '${num}');
-      INSERT INTO pass_entries (date, status, visitor_id) 
-      VALUES ('18-Sep-2020', 'Success', '${num}');
-      INSERT INTO pass_entries (date, status, visitor_id) 
-      VALUES ('25-Sep-2020', 'Success', '${num}');`
+      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+      VALUES ('29-Aug-2020', 'Success', '${num}','${num}');
+      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+      VALUES ('04-Sep-2020', 'Declined', '${num}','${num}');
+      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+      VALUES ('13-Sep-2020', 'Success', '${num}','${num}');
+      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+      VALUES ('18-Sep-2020', 'Success', '${num}','${num}');
+      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+      VALUES ('25-Sep-2020', 'Success', '${num}','${num}');`
     array += entry;
     num++;
   }

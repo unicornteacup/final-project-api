@@ -9,6 +9,9 @@ module.exports = db => {
       SELECT *
       FROM pass_entries
       JOIN guests ON guests.entry_id = pass_entries.id
+      JOIN visitors ON visitor_id = visitors.id
+      JOIN trails ON trail_id = trails.id
+      WHERE visitor.id = 1
     `
     )
     .then(result => {

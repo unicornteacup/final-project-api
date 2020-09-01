@@ -34,6 +34,7 @@ CREATE TABLE pass_entries (
   id SERIAL PRIMARY KEY NOT NULL,
   date DATE NOT NULL,
   status VARCHAR(255) NOT NULL,
+  trail_id INTEGER REFERENCES trails(id)
   visitor_id INTEGER REFERENCES visitors(id) ON DELETE CASCADE
 );
 

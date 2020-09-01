@@ -31,7 +31,6 @@ CREATE TABLE visitors (
   phone VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL
-  
 );
 
 CREATE TABLE pass_entries (

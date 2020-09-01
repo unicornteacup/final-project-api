@@ -26,7 +26,7 @@ userSeedsGenerator = (times) => {
     const randomIndex = Math.floor(Math.random() * Math.floor(names.length));
 
     let guest = `
-      INSERT INTO visitors (first_name, last_name, phone, entry_id) 
+      INSERT INTO guests (first_name, last_name, phone, entry_id) 
       VALUES ('${names[randomIndex]}', '${names[randomIndex + 5]}', '${phoneNumberGenerator(phoneNumbers)}', ${num});`
     array += guest;
     num++;
@@ -34,7 +34,7 @@ userSeedsGenerator = (times) => {
   return array
 }
 
-fs.writeFile('./db/seeds/guests_2.sql', userSeedsGenerator(1000), (err) => {
+fs.writeFile('./db/seeds/guests_4.sql', userSeedsGenerator(1000), (err) => {
   if (err) throw err;
   console.log('The file has been saved!');
 });

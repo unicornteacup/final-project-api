@@ -16,6 +16,9 @@ CREATE TABLE trails (
   name VARCHAR(255) NOT NULL,
   latitude Decimal(8,6),
   longitude Decimal(9,6),
+  image VARCHAR(2048) NOT NULL,
+  description TEXT,
+  status VARCHAR(255) NOT NULL,
   warning TEXT,
   max_capacity INTEGER NOT NULL,
   park_id INTEGER REFERENCES parks(id) ON DELETE CASCADE

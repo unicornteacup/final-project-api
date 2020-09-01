@@ -14,10 +14,8 @@ CREATE TABLE parks (
 CREATE TABLE trails (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
-  map_url VARCHAR(2048) NOT NULL,
-  image VARCHAR(2048) NOT NULL,
-  description TEXT,
-  status VARCHAR(255) NOT NULL,
+  latitude Decimal(8,6),
+  longitude Decimal(9,6),
   warning TEXT,
   max_capacity INTEGER NOT NULL,
   park_id INTEGER REFERENCES parks(id) ON DELETE CASCADE

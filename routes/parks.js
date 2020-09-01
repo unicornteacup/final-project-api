@@ -1,59 +1,54 @@
 const router = require("express").Router();
 
 module.exports = db => {
-  router.get("/parks", (request, response) => {
+
+  // getting all the parks
+  router.get("/parks", (req,res) => {
     db.query(
       `
       SELECT
         parks.id,
-        parks.name,
-        parks.description AS description,
-        array_agg(DISTINCT trails.id) AS trails,
+        parks.name AS name,
+        parks.description AS description
       FROM parks
-      JOIN trails ON parks_id = parks.id
+      JOIN trails ON park_id = parks.id
       GROUP BY parks.id
       ORDER BY parks.id
     `
-    ).then(({ rows: parks }) => {
-      response.json(parks);
+    )
+    .then(({ rows: parks }) => {
+      res.json(parks);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
     });
   });
 
-  const router = require("express").Router();
-
-  module.exports = db => {
-    router.get("/parks/:id", (request, response) => {
-      db.query(
-        `
-        SELECT
-          parks.id,
-          parks.name,
-          parks.description AS description,
-          array_agg(DISTINCT trails.id) AS trails,
-          COUNT(pass_entries.id) AS count, 
-        FROM parks
-        JOIN trails ON parks_id = parks.id
-        JOIN passes ON trails_id = trails.id
-        JOIN pass_entries ON pass_id = pass.id
-        GROUP BY parks.id
-        ORDER BY parks.id
+  //getting individual park 
+  router.get("/parks/:id", (req,res)=> {
+      
+    db.query(
       `
-      ).then(({ rows: parks }) => {
-        response.json(parks);
+      SELECT   
+        parks.id, 
+        parks.name AS name,
+        parks.description AS description
+        FROM parks
+        WHERE parks.id = $1`, [req.params.id])
+
+      .then(result => {
+        res.status(200).json({park: result.rows})
+      })
+
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
       });
-    });
-  
-    return router;
-  };
 
-
-
-
-
-
-
-
-
+      });
 
   return router;
 };

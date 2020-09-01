@@ -1,12 +1,16 @@
-require('dotenv').config();
-const Express = require('express');
-const App = Express();
+// load .env data into process.env
+require("dotenv").config();
+
+// Web server config
+const express     = require('express');
+const app         = express();
 const BodyParser = require('body-parser');
+const ENV         = process.env.ENV || "development";
+const PORT       = 8080;
+const morgan     = require('morgan');
+const cookieSession = require('cookie-session');
 
-const ENV        = process.env.ENV || "development";
-const PORT = 8080;
-
-
+// PG database client/connection setup
 const { Pool } = require('pg');
 
 let dbParams = {};
@@ -25,43 +29,53 @@ if (process.env.DATABASE_URL) {
 const db = new Pool(dbParams);
 db.connect();
 
-// db
-//   .query(`SELECT *
-//   FROM parks
-//   JOIN trails ON park_id = parks.id
-//   WHERE parks.id = 3;`)
-//   .then(res => console.log(res.rows))
-//   .catch(err => console.error('Error executing query', err.stack))
-
-
+// Load the logger first so all (static) HTTP requests are logged to STDOUT
+// 'dev' = Concise output colored by response status for development use.
+//         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
+app.use(morgan('dev'));
 
 // Express Configuration
-App.use(BodyParser.urlencoded({ extended: false }));
-App.use(BodyParser.json());
-App.use(Express.static('public'));
+app.use(BodyParser.urlencoded({ extended: false }));
+app.use(BodyParser.json());
+app.use(express.static('public'));
+
+// CookieSession
+app.use(cookieSession({
+  name: 'session',
+  cookie: {maxAge: 36000000, httpOnly: false},
+  keys: ['thisismysuperlongstringtouseforcookiesessions', 'thisisasecondlongstring']
+}));
+// add req.session.user_id = user.id; to app.post login route
 
 // Sample GET route
-App.get('/', (req, res) => res.json({
+app.get('/', (req, res) => res.json({
   message: "Seems to work!",
 }));
 
-// geting routes
+app.get("/test", (req, res) => {
+  res.send("🤗");
+});
 
+// Separated Routes 
+const homeRoutes = require('./routes/home');
 const parksRoutes = require('./routes/parks');
-//const parkRoute = require('./routes/park');
-//const passesRoutes = require('./routes/')
-const trailsRoutes = require('./routes/trail');
-const visitorsRoutes = require('./routes/users');
+const trailsRoutes = require('./routes/trails');
+const visitorsRoutes = require('./routes/visitors');
+const passRoutes = require('./routes/pass');
+const mybookingsRoutes = require('./routes/mybookings');
 
-App.use(parksRoutes(db));
-App.use(parkRoute(db));
-App.use(trailsRoutes(db));
-App.use(visitorsRoutes(db));
+// Mount all routes
+app.use("/api",homeRoutes(db));
+app.use("/api",trailsRoutes(db));
+app.use("/api",parksRoutes(db));
+app.use("/api",visitorsRoutes(db));
+app.use("/api",passRoutes(db));
+app.use("/api",mybookingsRoutes(db));
 
 
-
-
-App.listen(PORT, () => {
+//Listening Port
+app.listen(PORT, () => {
   // eslint-disable-next-line no-console
   console.log(`Express seems to be listening on port ${PORT} so that's pretty good 👍`);
 });
+

@@ -3,7 +3,7 @@ const router = require("express").Router();
 module.exports = db => {
 
   // getting all the parks
-  router.get("/pass", (req,res) => {
+  router.get("/mybookings", (req,res) => {
     db.query(
       `
       SELECT *
@@ -11,7 +11,6 @@ module.exports = db => {
       JOIN guests ON guests.entry_id = pass_entries.id
       JOIN visitors ON visitor_id = visitors.id
       JOIN trails ON trail_id = trails.id
-      WHERE visitor.id = 1
     `
     )
     .then(result => {

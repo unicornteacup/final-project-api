@@ -12,6 +12,7 @@ const cookieSession = require('cookie-session');
 
 // PG database client/connection setup
 const { Pool } = require('pg');
+
 let dbParams = {};
 if (process.env.DATABASE_URL) {
   dbParams.connectionString = process.env.DATABASE_URL;
@@ -24,6 +25,7 @@ if (process.env.DATABASE_URL) {
     database: process.env.DB_NAME
   };
 }
+
 const db = new Pool(dbParams);
 db.connect();
 
@@ -60,6 +62,7 @@ const parksRoutes = require('./routes/parks');
 const trailsRoutes = require('./routes/trails');
 const visitorsRoutes = require('./routes/visitors');
 const passRoutes = require('./routes/pass');
+const mybookingsRoutes = require('./routes/mybookings');
 
 // Mount all routes
 app.use("/api",homeRoutes(db));
@@ -67,6 +70,7 @@ app.use("/api",trailsRoutes(db));
 app.use("/api",parksRoutes(db));
 app.use("/api",visitorsRoutes(db));
 app.use("/api",passRoutes(db));
+app.use("/api",mybookingsRoutes(db));
 
 
 //Listening Port

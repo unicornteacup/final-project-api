@@ -10,7 +10,7 @@ module.exports = db => {
       FROM pass_entries
       JOIN guests ON guests.entry_id = pass_entries.id
       JOIN visitors ON visitor_id = visitors.id
-      JOIN trails ON pass_entries.trail_id = trails.id
+      JOIN trails ON trail_id = trails.id
     `
     )
     .then(result => {

@@ -1,27 +1,10 @@
 const router = require("express").Router();
 
 module.exports = db => {
-  
-//GETTING previous passes
-router.get("/pass", (req,res) => {
-    
-  db.query(
-    `
-    SELECT *
-    FROM pass_entries
-    JOIN trails `
-  )
-  .then(result => {
-      res.status(200).json({pass_entries: result.rows})
-    })
-  .catch(err => {
-    res
-      .status(500)
-      .json({ error: err.message });
-  });
-});
+
   // INSERTING new info into database
-  router.post("/pass", (req,res) => {
+
+  router.post("/guests", (req,res) => {
     if (process.env.TEST_ERROR) {
       setTimeout(() => response.status(500).json({}), 1000);
       return;
@@ -40,8 +23,6 @@ router.get("/pass", (req,res) => {
       SELECT *
       FROM pass_entries
       JOIN guests ON guests.entry_id = pass_entries.id
-      JOIN visitors ON visitor_id = visitors.id
-      JOIN trails ON trail_id = trails.id
     `)
     })
 
@@ -57,10 +38,27 @@ router.get("/pass", (req,res) => {
 
   });
 
-  
+  //GETTING previous passes
+  router.get("/new_pass/:id", (req,res) => {
+    
+    db.query(
+      `
+      SELECT *
+      FROM pass_entries
+      WHERE pass.entry_id = $1`, [req.params.id]
+    )
+    .then(result => {
+        res.status(200).json({pass_entries: result.rows})
+      })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  });
 
   //deleting passes through the pass_id
-  router.delete("/pass/:id", (req, res) => {
+  router.delete("/new_pass/:id", (req, res) => {
     if (process.env.TEST_ERROR) {
       setTimeout(() => response.status(500).json({}), 1000);
       return;

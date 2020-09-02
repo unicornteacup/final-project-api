@@ -27,8 +27,8 @@ module.exports = db => {
   });
 
   //getting individual park 
+
   router.get("/parks/:id", (req,res)=> {
-      
     db.query(
       `
       SELECT   

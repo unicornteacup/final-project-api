@@ -7,7 +7,6 @@ module.exports = db => {
       `
       SELECT * 
       FROM visitors
-      WHERE visitors.id = 3
     `)
     .then(result => {
       res.status(200).json({visitors: result.rows})

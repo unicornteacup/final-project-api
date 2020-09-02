@@ -3,7 +3,7 @@ const router = require("express").Router();
 module.exports = db => {
 
   // getting past history of bookings. Which trail, which date, which people 
-  router.get("/mybookings", (req,res) => {
+  router.get("/mybookings/:id", (req,res) => {
     db.query(
       `
       SELECT *
@@ -11,7 +11,8 @@ module.exports = db => {
       JOIN guests ON guests.entry_id = pass_entries.id
       JOIN visitors ON visitor_id = visitors.id
       JOIN trails ON trail_id = trails.id
-    `
+      WHERE trails.park_id = $1`, [req.params.id]
+    
     )
     .then(result => {
         res.status(200).json({pass_entries: result.rows})
@@ -22,6 +23,11 @@ module.exports = db => {
         .json({ error: err.message });
     });
   });
+
+
+
+
+
 
   return router;
 };

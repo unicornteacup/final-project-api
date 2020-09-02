@@ -57,15 +57,13 @@ app.get("/test", (req, res) => {
 });
 
 // Separated Routes 
-const homeRoutes = require('./routes/home');
 const parksRoutes = require('./routes/parks');
 const trailsRoutes = require('./routes/trails');
 const visitorsRoutes = require('./routes/visitors');
-const passRoutes = require('./routes/new_pass');
+const passRoutes = require('./routes/pass');
 const mybookingsRoutes = require('./routes/mybookings');
 
 // Mount all routes
-app.use("/api",homeRoutes(db));
 app.use("/api",trailsRoutes(db));
 app.use("/api",parksRoutes(db));
 app.use("/api",visitorsRoutes(db));

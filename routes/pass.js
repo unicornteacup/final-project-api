@@ -1,33 +1,27 @@
 const router = require("express").Router();
 
 module.exports = db => {
-
-  // SHOW EMPTY FORM???? 
-  // router.get("/new_pass", (req,res) => {
+  
+//GETTING previous passes
+router.get("/pass", (req,res) => {
     
-  //   db.query(
-  //     `
-  //     SELECT *
-  //     FROM visitors
-  //     JOIN guests ON guests.entry_id = pass_entries.id
-  //     JOIN visitors ON visitor_id = visitors.id
-  //     JOIN trails ON trail_id = trails.id
-  //     WHERE visitor.id = 1
-  //   `
-  //   )
-  //   .then(result => {
-  //       res.status(200).json({pass_entries: result.rows})
-  //     })
-  //   .catch(err => {
-  //     res
-  //       .status(500)
-  //       .json({ error: err.message });
-  //   });
-  // });
-
-
+  db.query(
+    `
+    SELECT *
+    FROM pass_entries
+    JOIN trails `
+  )
+  .then(result => {
+      res.status(200).json({pass_entries: result.rows})
+    })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+});
   // INSERTING new info into database
-  router.put("/new_pass/:id", (req,res) => {
+  router.post("/pass", (req,res) => {
     if (process.env.TEST_ERROR) {
       setTimeout(() => response.status(500).json({}), 1000);
       return;
@@ -64,7 +58,9 @@ module.exports = db => {
   });
 
   
-  router.delete("/new_pass/:id", (req, res) => {
+
+  //deleting passes through the pass_id
+  router.delete("/pass/:id", (req, res) => {
     if (process.env.TEST_ERROR) {
       setTimeout(() => response.status(500).json({}), 1000);
       return;
@@ -72,17 +68,14 @@ module.exports = db => {
     // console.log(req.body)
     db.query(
       `
-      DELETE FROM guests 
-    `)
+      DELETE FROM pass_entries
+      WHERE id = $1::integer`, [ Number(req.params.id)])
 
     .then(result => {
       return db.query(
       `
       SELECT *
       FROM pass_entries
-      JOIN guests ON guests.entry_id = pass_entries.id
-      JOIN visitors ON visitor_id = visitors.id
-      JOIN trails ON trail_id = trails.id
     `)
     })
 

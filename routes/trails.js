@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 module.exports = db => {
-
+//Getting all the trails
   router.get("/trails", (req, res) => {
     db.query(
       `
@@ -18,6 +18,8 @@ module.exports = db => {
         .json({ error: err.message });
     });
   });
+
+  //Getting individual trails
 
   router.get("/trails/:id", (req, res) => {
     db.query(

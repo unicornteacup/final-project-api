@@ -27,7 +27,7 @@ module.exports = db => {
 
 
   // INSERTING new info into database
-  router.put("/new_pass", (req,res) => {
+  router.put("/new_pass/:id", (req,res) => {
     if (process.env.TEST_ERROR) {
       setTimeout(() => response.status(500).json({}), 1000);
       return;
@@ -37,26 +37,13 @@ module.exports = db => {
 
     db.query(
       `
-      INSERT INTO interviews (student, interviewer_id, appointment_id) VALUES ($1::text, $2::integer, $3::integer)
-      ON CONFLICT (appointment_id) DO
-      UPDATE SET student = $1::text, interviewer_id = $2::integer
+      INSERT INTO guests (first_name, last_name, phone,entry_id)
+      VALUES($1::text, $2::text, $3::integer,$4::integer)
     `,
-      [student, interviewer, Number(request.params.id)]
-    )
-
-    db.query(
-      `
-      INSERT INTO guests (first_name, last_name, phone)
-      VALUES($1::text, $2::text, $3::integer)
-
-      JOIN guests ON guests.entry_id = pass_entries.id
-      JOIN visitors ON visitor_id = visitors.id
-      JOIN trails ON trail_id = trails.id
-      WHERE visitor.id = 1
-    `
-    )
+    [first_name, last_name, phone, Number(request.params.id)]
     .then(result => {
-        res.status(200).json({pass_entries: result.rows})
+        res.status(200).json({});
+        updateGuest();
       })
     .catch(err => {
       res
@@ -65,13 +52,22 @@ module.exports = db => {
     });
   });
 
+  
+  router.delete("/new_pass/:id", (req, res) => {
+    if (process.env.TEST_ERROR) {
+      setTimeout(() => response.status(500).json({}), 1000);
+      return;
+    }
 
-
-
-
-
-
-
+    db.query(`DELETE FROM  guests WHERE entry_id = $1::integer`, [
+      request.params.id
+    ]).then(() => {
+      setTimeout(() => {
+        response.status(204).json({});
+        updateAppointment(Number(request.params.id), null);
+      }, 1000);
+    });
+  });
 
 
   return router;

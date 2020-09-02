@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 module.exports = db => {
 
-  // getting all the parks
+  // getting past history of bookings. Which trail, which date, which people 
   router.get("/mybookings", (req,res) => {
     db.query(
       `

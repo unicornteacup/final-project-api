@@ -37,7 +37,18 @@ module.exports = db => {
 
     db.query(
       `
-      INSERT INTO visitors 
+      INSERT INTO interviews (student, interviewer_id, appointment_id) VALUES ($1::text, $2::integer, $3::integer)
+      ON CONFLICT (appointment_id) DO
+      UPDATE SET student = $1::text, interviewer_id = $2::integer
+    `,
+      [student, interviewer, Number(request.params.id)]
+    )
+
+    db.query(
+      `
+      INSERT INTO guests (first_name, last_name, phone)
+      VALUES($1::text, $2::text, $3::integer)
+
       JOIN guests ON guests.entry_id = pass_entries.id
       JOIN visitors ON visitor_id = visitors.id
       JOIN trails ON trail_id = trails.id

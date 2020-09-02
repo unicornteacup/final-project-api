@@ -14,14 +14,14 @@ CREATE TABLE parks (
 CREATE TABLE trails (
   id SERIAL PRIMARY KEY NOT NULL,
   name VARCHAR(255) NOT NULL,
-  image VARCHAR(2048) NOT NULL,
   latitude Decimal(8,6),
   longitude Decimal(9,6),
+  image VARCHAR(2048) NOT NULL,
   description TEXT,
-  warning TEXT,
   status VARCHAR(255) NOT NULL,
-  max_capacity INTEGER NOT NULL,
-  park_id INTEGER REFERENCES parks(id) ON DELETE CASCADE
+  warning TEXT,
+  park_id INTEGER REFERENCES parks(id) ON DELETE CASCADE,
+  max_capacity INTEGER NOT NULL
 );
 
 CREATE TABLE visitors (
@@ -31,6 +31,7 @@ CREATE TABLE visitors (
   phone VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL
+
 );
 
 CREATE TABLE pass_entries (

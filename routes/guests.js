@@ -4,10 +4,6 @@ module.exports = db => {
 
   // INSERTING guests into pass_entry
   router.post("/guests", (req,res) => {
-    if (process.env.TEST_ERROR) {
-      setTimeout(() => response.status(500).json({}), 1000);
-      return;
-    }
     db.query(
         `
         INSERT INTO guests (first_name, last_name, phone, entry_id)

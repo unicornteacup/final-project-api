@@ -44,8 +44,8 @@ CREATE TABLE pass_entries (
 
 CREATE TABLE guests (
   id SERIAL PRIMARY KEY NOT NULL,
-  first_name VARCHAR(255) NOT NULL,
-  last_name VARCHAR(255) NOT NULL,
-  phone VARCHAR(255) NOT NULL,
+  guests_first_name VARCHAR(255) NOT NULL,
+  guests_last_name VARCHAR(255) NOT NULL,
+  guests_phone VARCHAR(255) NOT NULL,
   entry_id INTEGER REFERENCES pass_entries(id) ON DELETE CASCADE
 );

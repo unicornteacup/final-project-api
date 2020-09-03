@@ -26,7 +26,7 @@ userSeedsGenerator = (times) => {
     const randomIndex = Math.floor(Math.random() * Math.floor(names.length));
 
     let guest = `
-      INSERT INTO guests (first_name, last_name, phone, entry_id) 
+      INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 
       VALUES ('${names[randomIndex]}', '${names[randomIndex + 5]}', '${phoneNumberGenerator(phoneNumbers)}', ${num});`
     array += guest;
     num++;

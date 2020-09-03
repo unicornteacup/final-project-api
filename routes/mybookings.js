@@ -2,7 +2,7 @@ const router = require("express").Router();
 
 module.exports = db => {
 
-  // getting past history of bookings. Which trail, which date, which guests
+  // GET past history of bookings. Which trail, which date, which guests for specific visitor/user
   router.get("/mybookings", (req,res) => {
 
     db.query(
@@ -11,8 +11,8 @@ module.exports = db => {
       JOIN trails ON trail_id = trails.id
       JOIN guests ON entry_id = pass_entries.id
       JOIN visitors ON visitors.id = pass_entries.visitor_id
-      WHERE visitors.id= $1
-      `, [req.query.id]
+      WHERE visitor_id= $1
+      `, [req.query.visitor_id]
     )
     .then(result => {
         res.status(200).json({pass_entries: result.rows})
@@ -24,15 +24,43 @@ module.exports = db => {
     });
   });
 
-// Editing the guest list 
+  // Deleting a pass 
+  router.delete("/mybookings", (req,res) => {
+  
+    db.query(
+      `
+      DELETE FROM pass_entries
+      JOIN guests ON entry_id = pass_entries.id
+      WHERE visitor_id = $1::integer
+      AND pass_entries.id = $2::integer
+      RETURNING * 
+     `, 
+      [Number(req.query.visitor_id),req.query.pass_entries.id])
+
+    .then(result => {
+      res.status(200).json({pass_entries: result.rows});
+    })
+
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+
+  });
+
+
+
+// Editing the guests on pass_entries
   router.post("/mybookings/:id", (req,res) => {
     db.query(
         `
-        INSERT INTO guests (first_name, last_name, phone, entry_id)
-        VALUES($1::text, $2::text, $3::integer, $4::integer)
+        UPDATE guests 
+        SET guests_first_name =$1::text, guests_last_name =$2::text, guests_phone =$3::integer, entry_id =$4::integer 
+        WHERE id = $5::integer
         RETURNING *
-        `,[req.body.first_name, req.body.last_name, req.body.phone, req.query.entry_id])
-
+        `,[req.body.first_name, req.body.last_name, req.body.phone, req.query.entry_id,req.query.id])
+ 
     .then(result => {
       res.status(200).json({guests: result.rows});
     })
@@ -42,25 +70,29 @@ module.exports = db => {
         .json({ error: err.message });
     });
   });
+
+  //DELETE guests from pass_entries 
   router.delete("/mybookings/:id", (req,res) => {
+    if (process.env.TEST_ERROR) {
+      setTimeout(() => response.status(500).json({}), 1000);
+      return;
+    }
     db.query(
       `
-      SELECT *
-      FROM pass_entries
-      JOIN guests ON guests.entry_id = pass_entries.id
-      JOIN visitors ON visitor_id = visitors.id
-      JOIN trails ON trail_id = trails.id
-      WHERE pass_entries.id= $1`, [req.params.id]
-    )
-    .then(result => {
-        res.status(200).json({pass_entries: result.rows})
+      DELETE FROM pass_entries
+      INNER JOIN guests ON guests.entry_id = pass_entries
+      WHERE entry_id = $1::integer
+      AND id = $2::integer`, [req.query.entry_id,req.query.id])
+
+      .then(result => {
+        res.status(200).json({pass_entries: result.rows});
       })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
     });
-  });
 
 
 

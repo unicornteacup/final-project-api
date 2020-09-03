@@ -63,15 +63,11 @@ router.get("/pass_entries/:id", (req,res) => {
 
   //DELETING passes through the pass_id
   router.delete("/pass_entries/:id", (req, res) => {
-    if (process.env.TEST_ERROR) {
-      setTimeout(() => response.status(500).json({}), 1000);
-      return;
-    }
-    // console.log(req.body)
+    console.log(req.query.id)
     db.query(
       `
       DELETE FROM pass_entries
-      WHERE id = $1::integer`, [ Number(req.params.id)])
+      WHERE id = $1::integer`, [Number(req.query.id)])
 
     .then(result => {
       return db.query(

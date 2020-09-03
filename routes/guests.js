@@ -6,10 +6,10 @@ module.exports = db => {
   router.post("/guests", (req,res) => {
     db.query(
         `
-        INSERT INTO guests (first_name, last_name, phone, entry_id)
+        INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id)
         VALUES($1::text, $2::text, $3::integer, $4::integer)
         RETURNING *
-        `,[req.body.first_name, req.body.last_name, req.body.phone, req.query.entry_id])
+        `,[req.body.guests_first_name, req.body.guests_last_name, req.body.guests_phone, req.query.entry_id])
 
     .then(result => {
       res.status(200).json({guests: result.rows});
@@ -22,13 +22,13 @@ module.exports = db => {
   });
 
   //GETTING specific guest
-router.get("/guests/:id", (req,res) => {
+router.get("/guests", (req,res) => {
     
     db.query(
       `
       SELECT *
       FROM guests
-      WHERE guests.id = $1`, [req.params.id]
+      WHERE id = $1`, [req.query.id]
     )
     .then(result => {
         res.status(200).json({guests: result.rows})
@@ -41,14 +41,14 @@ router.get("/guests/:id", (req,res) => {
   });
 
   //Deleting guests through the pass_id
-  router.delete("/guests/:id", (req, res) => {
+  router.delete("/guests", (req, res) => {
     if (process.env.TEST_ERROR) {
       setTimeout(() => response.status(500).json({}), 1000);
       return;
     }
     db.query(
       `DELETE FROM guests
-      WHERE id = $1::integer`, [ Number(req.params.id)])
+      WHERE id = $1::integer`, [ Number(req.query.id)])
     .then(result => {
       return db.query(
       `

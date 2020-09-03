@@ -2,14 +2,34 @@ const router = require("express").Router();
 
 module.exports = db => {
   
-//GETTING previous passes
+//Making a new pass 
+router.post("/pass_entries", (req,res) => {
+    
+  db.query(
+    `
+    INSERT into pass_entries(visitor_id, trail_id, date,status)
+    VALUES($1::integer, $2::integer, $3::date, $4::text )
+    RETURNING *`,
+  [req.query.visitor_id, req.query.trail_id, req.body.date, req.body.status]
+  )
+  .then(result => {
+      res.status(200).json({pass_entries: result.rows})
+    })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+});
+
+
+//GETTING ALL passes
 router.get("/pass_entries", (req,res) => {
     
   db.query(
     `
     SELECT *
     FROM pass_entries
-    GROUP BY pass_entries.id
   `
   )
   .then(result => {
@@ -21,46 +41,27 @@ router.get("/pass_entries", (req,res) => {
       .json({ error: err.message });
   });
 });
-  // INSERTING new info into database
-  router.post("/pass_entries", (req,res) => {
-    if (process.env.TEST_ERROR) {
-      setTimeout(() => response.status(500).json({}), 1000);
-      return;
-    }
-    // console.log(req.body)
-    db.query(
-      `
-      INSERT INTO guests (first_name, last_name, phone, entry_id)
-      VALUES($1::text, $2::text, $3::integer,$4::integer)
-    `,
-    [req.body.first_name, req.body.last_name, req.body.phone, Number(req.params.id)])
 
-    .then(result => {
-      return db.query(
-      `
-      SELECT *
-      FROM pass_entries
-      JOIN guests ON guests.entry_id = pass_entries.id
-      JOIN visitors ON visitor_id = visitors.id
-      JOIN trails ON trail_id = trails.id
-    `)
+//GETTING a specific pass with pass_id
+router.get("/pass_entries/:id", (req,res) => {
+    
+  db.query(
+    `
+    SELECT *
+    FROM pass_entries
+    WHERE id = $1::integer`, [ Number(req.params.id)]
+  )
+  .then(result => {
+      res.status(200).json({pass_entries: result.rows})
     })
-
-    .then(result => {
-      res.status(200).json({pass_entries: result.rows});
-    })
-
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
   });
+});
 
-  
-
-  //deleting passes through the pass_id
+  //DELETING passes through the pass_id
   router.delete("/pass_entries/:id", (req, res) => {
     if (process.env.TEST_ERROR) {
       setTimeout(() => response.status(500).json({}), 1000);

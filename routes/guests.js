@@ -8,8 +8,6 @@ module.exports = db => {
       setTimeout(() => response.status(500).json({}), 1000);
       return;
     }
-
-    // console.log('req.params.entry_id', req.params.entry_id)
     db.query(
         `
         INSERT INTO guests (first_name, last_name, phone, entry_id)
@@ -25,27 +23,7 @@ module.exports = db => {
         .status(500)
         .json({ error: err.message });
     });
-
   });
-
-  router.get("/guests", (req,res) => {
-    
-    db.query(
-      `
-      SELECT *
-      FROM guests
-    `)
-    .then(result => {
-        res.status(200).json({guests: result.rows})
-      })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  });
-
-
 
   //GETTING specific guest
 router.get("/guests/:id", (req,res) => {
@@ -66,18 +44,15 @@ router.get("/guests/:id", (req,res) => {
     });
   });
 
-  //deleting guests through the pass_id
+  //Deleting guests through the pass_id
   router.delete("/guests/:id", (req, res) => {
     if (process.env.TEST_ERROR) {
       setTimeout(() => response.status(500).json({}), 1000);
       return;
     }
-    // console.log(req.body)
     db.query(
-      `
-      DELETE FROM guests
+      `DELETE FROM guests
       WHERE id = $1::integer`, [ Number(req.params.id)])
-
     .then(result => {
       return db.query(
       `
@@ -85,18 +60,16 @@ router.get("/guests/:id", (req,res) => {
       FROM guests
     `)
     })
-
     .then(result => {
       res.status(200).json({guests: result.rows});
     })
-
     .catch(err => {
       res
         .status(500)
         .json({ error: err.message });
     });
-
   });
 
+  
   return router;
 };

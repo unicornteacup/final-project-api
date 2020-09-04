@@ -1,6 +1,42 @@
 const router = require("express").Router();
 
 module.exports = db => {
+      //GETTING all the guests
+// router.get("/guests", (req,res) => {
+    
+//   db.query(
+//     `
+//     SELECT *
+//     FROM guests`
+//   )
+//   .then(result => {
+//       res.status(200).json({guests: result.rows})
+//     })
+//   .catch(err => {
+//     res
+//       .status(500)
+//       .json({ error: err.message });
+//   });
+// });
+    //GETTING specific guest
+router.get("/guests", (req,res) => {
+    
+  db.query(
+    `
+    SELECT *
+    FROM guests
+    WHERE id = $1`, [req.query.id]
+  )
+  .then(result => {
+      res.status(200).json({guests: result.rows})
+    })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+});
+
 
   // INSERTING guests into pass_entry
   router.post("/guests", (req,res) => {
@@ -21,24 +57,6 @@ module.exports = db => {
     });
   });
 
-  //GETTING specific guest
-router.get("/guests", (req,res) => {
-    
-    db.query(
-      `
-      SELECT *
-      FROM guests
-      WHERE id = $1`, [req.query.id]
-    )
-    .then(result => {
-        res.status(200).json({guests: result.rows})
-      })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-  });
 
   //Deleting guests through the pass_id
   router.delete("/guests", (req, res) => {

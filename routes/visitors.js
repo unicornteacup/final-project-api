@@ -2,13 +2,11 @@ const router = require("express").Router();
 
 module.exports = db => {
   // get request for the form 
-  router.get("/visitors/:id", (req, res) => {
+  router.get("/visitors", (req, res) => {
     db.query(
       `
       SELECT * 
-      FROM visitors
-    
-      WHERE visitors.id = $1`, [req.params.id]
+      FROM visitors`
     )
     .then(result => {
       res.status(200).json({visitors: result.rows})

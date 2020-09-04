@@ -43,7 +43,7 @@ router.get("/pass_entries", (req,res) => {
 });
 
 //GETTING a specific pass with pass_id
-router.get("/pass_entries/:id", (req,res) => {
+router.get("/pass_entries", (req,res) => {
     
   db.query(
     `
@@ -62,7 +62,7 @@ router.get("/pass_entries/:id", (req,res) => {
 });
 
   //DELETING passes through the pass_id
-  router.delete("/pass_entries/:id", (req, res) => {
+  router.delete("/pass_entries", (req, res) => {
     console.log(req.query.id)
     db.query(
       `

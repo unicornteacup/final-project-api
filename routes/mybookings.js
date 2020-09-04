@@ -72,7 +72,7 @@ module.exports = db => {
   });
 
   //DELETE guests from pass_entries 
-  router.delete("/mybookings/:id", (req,res) => {
+  router.delete("/mybookings", (req,res) => {
     if (process.env.TEST_ERROR) {
       setTimeout(() => response.status(500).json({}), 1000);
       return;
@@ -80,9 +80,10 @@ module.exports = db => {
     db.query(
       `
       DELETE FROM pass_entries
-      INNER JOIN guests ON guests.entry_id = pass_entries
-      WHERE entry_id = $1::integer
-      AND id = $2::integer`, [req.query.entry_id,req.query.id])
+      JOIN guests ON entry_id = pass_entries.id
+      WHERE guests.entry_id = $1::integer
+      AND id = $2::integer`, 
+      [req.query.entry_id, req.query.id])
 
       .then(result => {
         res.status(200).json({pass_entries: result.rows});
@@ -93,15 +94,6 @@ module.exports = db => {
           .json({ error: err.message });
       });
     });
-
-
-
-
-
-
-
-
-
 
 
   return router;

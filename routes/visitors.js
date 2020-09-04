@@ -6,9 +6,8 @@ module.exports = db => {
     db.query(
       `
       SELECT * 
-      FROM visitors
-      WHERE visitors.id = 3
-    `)
+      FROM visitors`
+    )
     .then(result => {
       res.status(200).json({visitors: result.rows})
     })
@@ -21,3 +20,8 @@ module.exports = db => {
 
   return router;
 };
+
+
+  // JOIN pass_entries ON visitor_id = visitors.id
+      // JOIN guests ON entry_id = pass_entries.id
+      // JOIN trails ON trail_id = trails.id

@@ -1,7 +1,5 @@
 
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
-      VALUES ('Daimhin', 'Dalong', '4382165851', 'votawek@totken.السعودية', 'password');
-      INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Bony', 'Brad', '8738718413', 'fupke@dugah.seven', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Kailin', 'Kairn', '6473622137', 'ociragsa@nihijvo.la', 'password');
@@ -300,8 +298,6 @@
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Tomas', 'Tony', '4505445850', 'figfe@oke.rodeo', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
-      VALUES ('Aidy', 'Airen', '4388831056', 'hav@wodofi.ファッション', 'password');
-      INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Morgan', 'Motade', '2505773470', 'lelukfu@so.pictet', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Kylar', 'Kynan', '3673807303', 'zalnagir@ogi.gold', 'password');
@@ -540,11 +536,7 @@
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Kaydyne', 'Kaywan', '9051022405', 'voknen@zin.ch', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
-      VALUES ('Jaiden', 'Jaise', '4036343476', 'fin@dej.台灣', 'password');
-      INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Pravin', 'Preston-Jay', '6471253161', 'suwce@rahejvi.hdfcbank', 'password');
-      INSERT INTO visitors (first_name, last_name, phone, email, password) 
-      VALUES ('Stuart', 'Suilven', '4384186365', 'sewpa@um.政府', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Aun', 'Avi', '7782737461', 'helwen@homedotod.shriram', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
@@ -751,8 +743,6 @@
       VALUES ('Dennan', 'Denon', '5144443101', 'ehuru@edaki.jewelry', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Lagan', 'Lancelot', '7824340371', 'ne@oruta.hr', 'password');
-      INSERT INTO visitors (first_name, last_name, phone, email, password) 
-      VALUES ('Tamiem', 'Tanvir', '8078150441', 'cuv@ewoser.政务', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Dregan', 'Dustin', '7786621386', 'ag@ijre.swiss', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
@@ -1072,7 +1062,7 @@
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Arrham', 'Arthur', '9028748812', 'avudikhu@pu.work', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
-      VALUES ('Malakhy', 'Ma'moon', '5876576135', 'aramo@ha.tienda', 'password');
+      VALUES ('Malakhy', 'Mamoon', '5876576135', 'aramo@ha.tienda', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Brendyn', 'Brian', '8677175860', 'fokbekgek@keroszo.csc', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
@@ -1284,7 +1274,7 @@
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Argyle', 'Arihant', '5877663836', 'kikke@kevwitdow.lk', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
-      VALUES ('Malakhy', 'Ma'moon', '8731477578', 'bo@va.er', 'password');
+      VALUES ('Malakhy', 'Mamoon', '8731477578', 'bo@va.er', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Kainin', 'Kajally', '8731006034', 'zewlot@oskitim.airforce', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 

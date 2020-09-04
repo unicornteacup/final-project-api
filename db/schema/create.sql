@@ -16,9 +16,12 @@ CREATE TABLE trails (
   name VARCHAR(255) NOT NULL,
   latitude Decimal(8,6),
   longitude Decimal(9,6),
+  image VARCHAR(2048) NOT NULL,
+  description TEXT,
+  status VARCHAR(255) NOT NULL,
   warning TEXT,
-  max_capacity INTEGER NOT NULL,
-  park_id INTEGER REFERENCES parks(id) ON DELETE CASCADE
+  park_id INTEGER REFERENCES parks(id) ON DELETE CASCADE,
+  max_capacity INTEGER NOT NULL
 );
 
 CREATE TABLE visitors (
@@ -28,20 +31,21 @@ CREATE TABLE visitors (
   phone VARCHAR(255) NOT NULL,
   email VARCHAR(255) NOT NULL,
   password VARCHAR(255) NOT NULL
+
 );
 
 CREATE TABLE pass_entries (
   id SERIAL PRIMARY KEY NOT NULL,
   date DATE NOT NULL,
   status VARCHAR(255) NOT NULL,
-  trail_id INTEGER REFERENCES trails(id)
+  trail_id INTEGER REFERENCES trails(id),
   visitor_id INTEGER REFERENCES visitors(id) ON DELETE CASCADE
 );
 
 CREATE TABLE guests (
   id SERIAL PRIMARY KEY NOT NULL,
-  first_name VARCHAR(255) NOT NULL,
-  last_name VARCHAR(255) NOT NULL,
-  phone VARCHAR(255) NOT NULL,
+  guests_first_name VARCHAR(255) NOT NULL,
+  guests_last_name VARCHAR(255) NOT NULL,
+  guests_phone VARCHAR(255) NOT NULL,
   entry_id INTEGER REFERENCES pass_entries(id) ON DELETE CASCADE
 );

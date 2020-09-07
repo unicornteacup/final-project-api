@@ -40,12 +40,13 @@ router.get("/guests", (req,res) => {
 
   // INSERTING guests into pass_entry
   router.post("/guests", (req,res) => {
+    console.log('req.query',req.query)
     db.query(
         `
         INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id)
         VALUES($1::text, $2::text, $3::integer, $4::integer)
         RETURNING *
-        `,[req.body.guests_first_name, req.body.guests_last_name, req.body.guests_phone, req.query.entry_id])
+        `,[req.body.guests_first_name, req.body.guests_last_name, req.body.guests_phone, Number(req.query.entry_id)])
 
     .then(result => {
       res.status(200).json({guests: result.rows});

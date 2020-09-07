@@ -14,4 +14,7 @@ INSERT INTO parks (name, image, description)
 VALUES ('Mount Seymour','https://lh3.googleusercontent.com/proxy/4IYcjfJoSXUE5e6d82I5euxlgku9v7r9vdnhyMjtVcoTg8vpfIoodcXlVJRyOYa641L4axcZ2114w3gsrGfvhoKDak_AE6lfoqtusIYdnPLVOaj_Sm8', 'Upper mountain trails including the Seymour Main Trail, Mystery Lake Trail, and Dog Mountain Trail.');
 
 INSERT INTO parks (name, image, description)
+VALUES ('Mount Seymour','https://lh3.googleusercontent.com/proxy/4IYcjfJoSXUE5e6d82I5euxlgku9v7r9vdnhyMjtVcoTg8vpfIoodcXlVJRyOYa641L4axcZ2114w3gsrGfvhoKDak_AE6lfoqtusIYdnPLVOaj_Sm8', 'Upper mountain trails including the Seymour Main Trail, Mystery Lake Trail, and Dog Mountain Trail.');
+
+INSERT INTO parks (name, image, description)
 VALUES ('Stawamus Chief','https://lh3.googleusercontent.com/proxy/4IYcjfJoSXUE5e6d82I5euxlgku9v7r9vdnhyMjtVcoTg8vpfIoodcXlVJRyOYa641L4axcZ2114w3gsrGfvhoKDak_AE6lfoqtusIYdnPLVOaj_Sm8', 'Chief Peaks Trail (also called the Backside Trail)');

@@ -49,7 +49,7 @@ router.get("/pass_entries", (req,res) => {
     `
     SELECT *
     FROM pass_entries
-    WHERE id = $1::integer`, [ Number(req.params.id)]
+    WHERE id = $1::integer`, [ Number(req.query.id)]
   )
   .then(result => {
       res.status(200).json({pass_entries: result.rows})

@@ -4,6 +4,7 @@ require("dotenv").config();
 // Web server config
 const express     = require('express');
 const app         = express();
+const pino = require('express-pino-logger')();
 const BodyParser = require('body-parser');
 const ENV         = process.env.ENV || "development";
 const PORT       = 8080;
@@ -63,6 +64,7 @@ const visitorsRoutes = require('./routes/visitors');
 const passRoutes = require('./routes/pass_entries');
 const guestsRoutes = require('./routes/guests');
 const mybookingsRoutes = require('./routes/mybookings');
+const confirmation = require('./routes/confirmation');
 
 // Mount all routes
 app.use("/api",trailsRoutes(db));
@@ -71,6 +73,7 @@ app.use("/api",visitorsRoutes(db));
 app.use("/api",passRoutes(db));
 app.use("/api",guestsRoutes(db));
 app.use("/api",mybookingsRoutes(db));
+app.use("/", confirmation())
 
 
 //Listening Port

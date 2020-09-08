@@ -1,5 +1,4 @@
 const router = require("express").Router();
-
 module.exports = db => {
   // get request for the form 
   router.get("/visitors", (req, res) => {
@@ -28,14 +27,13 @@ module.exports = db => {
         `,[req.body.first_name, req.body.last_name, req.body.phone, req.body.email, req.body.password])
  
     .then(result => {
-      res.status(200).json({visitors: result.rows});
+      res.status(200).json({visitorst: result.rows});
     })
     .catch(err => {
       res
         .status(500)
         .json({ error: err.message });
     });
-  });
-
+  })
   return router;
 };

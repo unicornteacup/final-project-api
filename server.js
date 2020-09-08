@@ -64,7 +64,8 @@ const visitorsRoutes = require('./routes/visitors');
 const passRoutes = require('./routes/pass_entries');
 const guestsRoutes = require('./routes/guests');
 const mybookingsRoutes = require('./routes/mybookings');
-const confirmation = require('./routes/confirmation');
+const confirmationRoutes = require('./routes/confirmation');
+const passEntriesUpdateRoutes = require('./routes/passEntriesUpdate');
 
 // Mount all routes
 app.use("/api",trailsRoutes(db));
@@ -73,8 +74,8 @@ app.use("/api",visitorsRoutes(db));
 app.use("/api",passRoutes(db));
 app.use("/api",guestsRoutes(db));
 app.use("/api",mybookingsRoutes(db));
-app.use("/", confirmation())
-
+app.use("/", confirmationRoutes())
+app.use("/", passEntriesUpdateRoutes(db))
 
 //Listening Port
 app.listen(PORT, () => {

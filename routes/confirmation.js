@@ -22,15 +22,13 @@ confirmationText = (times) => {
   }
 
 module.exports = () => {
+  const text = confirmationText(6)
   router.post("/confirmation", (req,res) => {
-    console.log('sending')
-    console.log('reqBodey', req.body)
-    res.header('Content-Type', 'application/json');
     client.messages
       .create({
         from: process.env.TWILIO_PHONE_NUMBER,
         to: req.body.to,
-        body: `confirmation text from BC Parks: ${confirmationText(6)}`
+        body: `confirmation text from BC Parks: ${text}`
       })
       .then(() => {
         res.send(JSON.stringify({ success: true }));
@@ -40,5 +38,48 @@ module.exports = () => {
         res.send(JSON.stringify({ success: false }));
       });
     });
+
+    router.post("/verification", (req, res) => {
+      if (req.body.code === text) {
+        res.send(JSON.stringify({ success: true }));
+      } else {
+        console.log('error')
+        res.send(JSON.stringify({ success: false }));
+      }
+    })
+
+    router.post("/success", (req,res) => {
+      client.messages
+        .create({
+          from: process.env.TWILIO_PHONE_NUMBER,
+          to: req.body.to,
+          body: `You've received the day pass for ${req.body.trail}.
+                  Lets go for a hike!`
+        })
+        .then(() => {
+          res.send(JSON.stringify({ success: true }));
+        })
+        .catch(err => {
+          console.log(err);
+          res.send(JSON.stringify({ success: false }));
+        });
+      });
+
+      router.post("/declined", (req,res) => {
+        client.messages
+          .create({
+            from: process.env.TWILIO_PHONE_NUMBER,
+            to: req.body.to,
+            body: `Your Day Pass for ${req.body.trail} was declined.
+                    Try another trail.`
+          })
+          .then(() => {
+            res.send(JSON.stringify({ success: true }));
+          })
+          .catch(err => {
+            console.log(err);
+            res.send(JSON.stringify({ success: false }));
+          });
+        });
   return router
 }

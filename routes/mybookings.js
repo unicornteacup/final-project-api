@@ -3,28 +3,27 @@ const router = require("express").Router();
 module.exports = db => {
 
     // GET past history of bookings. Which trail, which date, which guests for specific visitor/user
-    router.get("/mybookings", (req,res) => {
+    // router.get("/mybookings", (req,res) => {
 
-      db.query(
-        `
-        SELECT *
-        FROM pass_entries
-        JOIN guests ON entry_id = pass_entries.id
-      `
-      )
-      .then(result => {
-          res.status(200).json({pass_entries: result.rows})
-        })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-    });
+    //   db.query(
+    //     `
+    //     SELECT *
+    //     FROM pass_entries
+    //     JOIN guests ON entry_id = pass_entries.id
+    //   `
+    //   )
+    //   .then(result => {
+    //       res.status(200).json({pass_entries: result.rows})
+    //     })
+    //   .catch(err => {
+    //     res
+    //       .status(500)
+    //       .json({ error: err.message });
+    //   });
+    // });
 
     // test route to group bookoings by pass.id
-    router.get("/mybookingsnew", (req,res) => {
-
+    router.get("/mybookings", (req,res) => {
       db.query(
         `
         SELECT *
@@ -33,7 +32,6 @@ module.exports = db => {
       )
       .then(result => {
           let passes = result.rows
-          console.log('pass:', pass)
 
           let passResults = Promise.all(
             passes.map((pass) => {
@@ -43,7 +41,7 @@ module.exports = db => {
                 FROM guests
                 WHERE entry_id = $1`, [pass.id]
               )
-              .then(([pass,result]) => {
+              .then((result) => {
                 pass.guests = result.rows
 
               })
@@ -52,10 +50,12 @@ module.exports = db => {
           return Promise.all([passes, passResults])
         })
         .then(([passes, passResults]) => {
+          console.log('passes:', passes)
           res.status(200).json(passes)
         })
         
       .catch(err => {
+        console.log('error:', err)
         res
           .status(500)
           .json({ error: err.message });

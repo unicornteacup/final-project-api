@@ -67,7 +67,7 @@ router.get("/guests", (req,res) => {
     }
     db.query(
       `DELETE FROM guests
-      WHERE id = $1::integer`, [ Number(req.query.id)])
+      WHERE entry_id = $1::integer`, [ Number(req.query.id)])
     .then(result => {
       return db.query(
       `

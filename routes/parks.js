@@ -9,6 +9,7 @@ module.exports = db => {
       SELECT
         parks.id,
         parks.name AS name,
+        parks.image AS image,
         parks.description AS description
       FROM parks
       JOIN trails ON park_id = parks.id

@@ -2,9 +2,9 @@
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 
       VALUES ('Lock', 'Loghan', '8255514662', 1);
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 
-      VALUES ('Kallin', 'Kames', '5872285172', 2);
+      VALUES ('Kallin', 'Kames', '5872285172', 1);
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 
-      VALUES ('Adrien', 'Afonso', '2896567756', 3);
+      VALUES ('Adrien', 'Afonso', '2896567756', 1);
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 
       VALUES ('Joe', 'Johann', '3432013123', 4);
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 

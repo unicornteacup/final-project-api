@@ -22,6 +22,46 @@ module.exports = db => {
       });
     });
 
+    // test route to group bookoings by pass.id
+    router.get("/mybookingsnew", (req,res) => {
+
+      db.query(
+        `
+        SELECT *
+        FROM pass_entries
+       `
+      )
+      .then(result => {
+          let passes = result.rows
+          console.log('pass:', pass)
+
+          let passResults = Promise.all(
+            passes.map((pass) => {
+              return db.query(
+                `
+                SELECT * 
+                FROM guests
+                WHERE entry_id = $1`, [pass.id]
+              )
+              .then(([pass,result]) => {
+                pass.guests = result.rows
+
+              })
+            })
+          )
+          return Promise.all([passes, passResults])
+        })
+        .then(([passes, passResults]) => {
+          res.status(200).json(passes)
+        })
+        
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+    });
+
   // GET past history of bookings. Which trail, which date, which guests for specific visitor/user
   router.get("/mybookings", (req,res) => {
 

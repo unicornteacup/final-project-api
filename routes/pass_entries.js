@@ -82,7 +82,6 @@ router.get("/pass_entries", (req,res) => {
 
   //DELETING passes through the pass_id
   router.delete("/pass_entries", (req, res) => {
-    console.log(req.query.id)
     db.query(
       `
       DELETE FROM pass_entries

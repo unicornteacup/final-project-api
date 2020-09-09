@@ -66,7 +66,8 @@ const guestsRoutes = require('./routes/guests');
 const mybookingsRoutes = require('./routes/mybookings');
 const confirmationRoutes = require('./routes/confirmation');
 const passEntriesUpdateRoutes = require('./routes/passEntriesUpdate');
-
+const entryByDateRoute = require('./routes/entryByDate');
+const visitorByEntryRoute = require('./routes/visitor_by_entry');
 const lotteryRoute = require('./routes/lottery');
 
 // Mount all routes
@@ -76,8 +77,11 @@ app.use("/api",visitorsRoutes(db));
 app.use("/api",passRoutes(db));
 app.use("/api",guestsRoutes(db));
 app.use("/api",mybookingsRoutes(db));
-app.use("/", confirmationRoutes())
-app.use("/", passEntriesUpdateRoutes(db))
+
+app.use("/", confirmationRoutes());
+app.use("/", passEntriesUpdateRoutes(db));
+app.use("/api", entryByDateRoute(db));
+app.use("/api", visitorByEntryRoute(db));
 
 app.use("/", lotteryRoute(db));
 

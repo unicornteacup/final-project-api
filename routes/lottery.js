@@ -2,7 +2,7 @@ const router = require("express").Router();
 require('dotenv').config();
 const bodyParser = require('body-parser');
 
-const { winners } = require('../helpers/getWinners');
+const { processWinners } = require('../helpers/getWinners');
 
 
 const accountSid = process.env.TWILIO_ACCOUNT_SID; 
@@ -21,39 +21,39 @@ module.exports = db => {
   router.get("/lottery", (req,res) => {
     db.query(`SELECT * FROM trails;`)
     .then(result => {
+      const trails = result.rows;
       const entries = result.rows.map((trail) => {
         return db.query(`
           SELECT *
           FROM pass_entries 
           WHERE trail_id = ${trail.id} 
           AND date = '${date}'
-          ;`)
-          .then(result => {
-            console.log(winners(result.rows, trail.max_capacity))
-            res.json({trail: result.rows})
-          })
-          .catch(err => {
-            res
-            .status(500)
-            .json({ error: err.message });
-          })
+          ;`);
       })
       Promise.all(entries)
+      .then((allTrailsEntries) => {
+        let winners = []
+        allTrailsEntries.forEach((trailEntries, i) => {
+          winners.push(processWinners(db, trailEntries.rows, trails[i].max_capacity))
+        })
+        Promise.all(winners)
+        .then(() => {
+          res.status(200).json({ status: 'success' })
+        })
+        .catch(err => {
+          res
+          .status(500)
+        });
+      })
+      .catch(err => {
+        res
+        .status(500)
+      });
     })
     .catch(err => {
       res
       .status(500)
-      .json({ error: err.message });
     });
   });
   return router;
 };
-
-
-
-        // `
-        // SELECT *
-        // FROM pass_entries 
-        // WHERE trail_id = 12 AND date = '09-Sep-2020';
-
-        // WHERE date = `

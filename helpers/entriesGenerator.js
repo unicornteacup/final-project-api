@@ -1,33 +1,49 @@
-const fs = require('fs');
+// const fs = require('fs');
 
-userSeedsGenerator = (times) => {
-  let array = [];
-  let num = 1;
-  let random1 = Math.floor(Math.random() * Math.floor(11));
-  let random2 = Math.floor(Math.random() * Math.floor(11));
-  let random3 = Math.floor(Math.random() * Math.floor(11));
-  let random4 = Math.floor(Math.random() * Math.floor(11));
-  let random5 = Math.floor(Math.random() * Math.floor(11));
+// userSeedsGenerator = (times) => {
+//   let array = [];
+//   let num = 50;
 
-  while (num < times) {
-    let entry = `
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('29-Aug-2020', 'Success', '${random1+1}','${num}');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('04-Sep-2020', 'Declined', '${random2+1}','${num}');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('13-Sep-2020', 'Declined', '${random3+1}','${num}');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('18-Sep-2020', 'Success', '${random4+1}','${num}');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('25-Sep-2020', 'Success', '${random5+1}','${num}');`
-    array += entry;
-    num++;
-  }
-  return array;
-}
+//   while (num < times) {
+//     let entry = `
+//       INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+//       VALUES ('Sep 10 2020', 'Pending', '1','${num}');
+//       INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+//       VALUES ('Sep 12 2020', 'Pending', '1,'${num}');
+//       INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+//       VALUES ('Sep 14 2020', 'Pending', '1','${num}');
+//       INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+//       VALUES ('Sep 10 2020', 'Pending', '4','${num}');
+//       INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+//       VALUES ('Sep 12 2020', 'Pending', '4','${num}');
+//       INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+//       VALUES ('Sep 14 2020', 'Pending', '4','${num}');
+//       INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+//       VALUES ('Sep 10 2020', 'Pending', '7','${num}');
+//       INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+//       VALUES ('Sep 12 2020', 'Pending', '7','${num}');
+//       INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+//       VALUES ('Sep 14 2020', 'Pending', '7','${num}');
+//       INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+//       VALUES ('Sep 10 2020', 'Pending', '10','${num}');
+//       INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+//       VALUES ('Sep 12 2020', 'Pending', '10','${num}');
+//       INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
+//       VALUES ('Sep 14 2020', 'Pending', '10','${num}');`
+//     array += entry;
+//     num++;
+//   }
+//   return array;
+// }
 
-fs.writeFile('./db/seeds/pass_entries_2.sql', userSeedsGenerator(250), (err) => {
-  if (err) throw err;
-  console.log('The file has been saved!');
-});
+// fs.writeFile('../db/seeds/entries/pass_entries_6.sql', userSeedsGenerator(120), (err) => {
+//   if (err) throw err;
+//   console.log('The file has been saved!');
+// });
+
+let date = new Date;
+  date.setHours(0, 0, 0, 0)
+  date = date.setDate(date.getDate() + 1);
+  date = new Date(date)
+  date = date.toDateString().slice(4)
+  console.log(date)

@@ -13,8 +13,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 router.post("/pass_entries", (req,res) => {
   let passentry = req.body;
-
-  console.log('REQ.BODY', req.body)
   db.query(
     `
     INSERT into pass_entries(visitor_id, trail_id, date,status)
@@ -27,7 +25,6 @@ router.post("/pass_entries", (req,res) => {
     if (!passentry.guests) {
       return res.status(200).send(true)
     } else {
-      console.log('guests')
       let guestResults = Promise.all(
         passentry.guests.map((guest) =>{
           return db.query(
@@ -46,7 +43,6 @@ router.post("/pass_entries", (req,res) => {
         res.status(200).json(passEntry)
       })
       .catch(err => {
-        console.log('error=>>>>>', err)
         res
           .status(500)
           .json({ error: err.message });

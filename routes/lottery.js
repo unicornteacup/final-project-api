@@ -3,8 +3,6 @@ require('dotenv').config();
 const bodyParser = require('body-parser');
 
 const { processWinners } = require('../helpers/getWinners');
-
-
 const accountSid = process.env.TWILIO_ACCOUNT_SID; 
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 

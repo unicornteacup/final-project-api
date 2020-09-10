@@ -28,7 +28,8 @@ module.exports = () => {
       .create({
         from: process.env.TWILIO_PHONE_NUMBER,
         to: req.body.to,
-        body: `confirmation text from BC Parks: ${text}`
+        body: `confirmation text from BC Parks: ${text}`,
+        mediaUrl: ['https://c1.staticflickr.com/3/2899/14341091933_1e92e62d12_b.jpg']
       })
       .then(() => {
         res.send(JSON.stringify({ success: true }));

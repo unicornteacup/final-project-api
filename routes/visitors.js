@@ -18,6 +18,7 @@ module.exports = db => {
     });
   });
 
+  //GETTING specific visitor
 
   router.post("/visitors", (req,res) => {
     db.query(

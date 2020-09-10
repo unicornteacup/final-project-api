@@ -1,6 +1,6 @@
 
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
-      VALUES ('Hanna', 'Oh Andrews', '6043548048', 'hannaohandrews@gmail.com', 'password');
+      VALUES ('Sergii', 'Gorbatyi', '6043548048', 'sergii@gmail.com', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 
       VALUES ('Kailin', 'Kairn', '6473622137', 'ociragsa@nihijvo.la', 'password');
       INSERT INTO visitors (first_name, last_name, phone, email, password) 

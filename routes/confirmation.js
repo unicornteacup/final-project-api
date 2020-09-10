@@ -28,7 +28,7 @@ module.exports = () => {
       .create({
         from: process.env.TWILIO_PHONE_NUMBER,
         to: req.body.to,
-        body: `confirmation text from BC Parks: ${text}`
+        body: `confirmation code from BC Parks: ${text}`
       })
       .then(() => {
         res.send(JSON.stringify({ success: true }));

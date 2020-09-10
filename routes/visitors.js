@@ -24,7 +24,7 @@ module.exports = db => {
     db.query(
         `
         INSERT INTO visitors (first_name,last_name, phone, email, password) 
-        VALUES($1::text, $2::text, $3::integer, $4::text, $5::text)
+        VALUES($1::text, $2::text, $3::text, $4::text, $5::text)
         RETURNING *
         `,[req.body.first_name, req.body.last_name, req.body.phone, req.body.email, req.body.password])
  

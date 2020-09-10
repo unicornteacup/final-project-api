@@ -22,7 +22,7 @@ module.exports = db => {
         client.messages
         .create({
           from: process.env.TWILIO_PHONE_NUMBER,
-          to: 7782292994,
+          to: phone,
           body: `Confirmation for your ${result.rows.name} on ${result.rows.date}`,
           // mediaUrl: ['https://upload.wikimedia.org/wikipedia/commons/d/d0/QR_code_for_mobile_English_Wikipedia.svg']
         })

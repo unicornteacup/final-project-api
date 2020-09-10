@@ -1,18 +1,18 @@
 
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 
-      VALUES ('Lock', 'Loghan', '8255514662', 1);
+      VALUES ('Andy', 'Lindsay', '8255514662', 1);
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 
-      VALUES ('Kallin', 'Kames', '5872285172', 1);
+      VALUES ('Glen', 'Chua', '5872285172', 1);
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 
-      VALUES ('Adrien', 'Afonso', '2896567756', 1);
+      VALUES ('Hafiz', 'Suara', '2896567756', 5);
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 
-      VALUES ('Joe', 'Johann', '3432013123', 4);
+      VALUES ('Travis', 'Borsa', '3432013123', 4);
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 
-      VALUES ('Porter', 'Pravin', '4162242150', 5);
+      VALUES ('Kelly', 'K-Fox', '4162242150', 4);
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 
-      VALUES ('Tristain', 'Turner', '5142730474', 6);
+      VALUES ('Meri', 'Ghazaryan', '5142730474', 2);
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 
-      VALUES ('Urban', 'Valen', '7800468505', 7);
+      VALUES ('Caroline', 'Lauder', '7800468505', 3);
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 
       VALUES ('Lysander', 'Macaulay', '9026675123', 8);
       INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id) 

@@ -2469,23 +2469,3 @@
       VALUES ('18-Sep-2020', 'Success', '9','247');
       INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
       VALUES ('25-Sep-2020', 'Success', '1','247');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('29-Aug-2020', 'Success', '8','248');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('04-Sep-2020', 'Declined', '7','248');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('13-Sep-2020', 'Declined', '9','248');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('18-Sep-2020', 'Success', '9','248');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('25-Sep-2020', 'Success', '1','248');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('29-Aug-2020', 'Success', '8','249');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('04-Sep-2020', 'Declined', '7','249');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('13-Sep-2020', 'Declined', '9','249');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('18-Sep-2020', 'Success', '9','249');
-      INSERT INTO pass_entries (date, status, trail_id, visitor_id) 
-      VALUES ('25-Sep-2020', 'Success', '1','249');

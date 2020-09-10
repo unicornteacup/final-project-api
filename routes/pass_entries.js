@@ -1,11 +1,20 @@
 const router = require("express").Router();
+const bodyParser = require('body-parser');
+const express = require('express')
+const app         = express();
+
 
 module.exports = db => {
   
 //Making a new pass 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
+
 router.post("/pass_entries", (req,res) => {
-  console.log(req.body)
-  let passentry = req.body.passentry
+  let passentry = req.body;
+
+  console.log('REQ.BODY', req.body)
   db.query(
     `
     INSERT into pass_entries(visitor_id, trail_id, date,status)
@@ -15,30 +24,35 @@ router.post("/pass_entries", (req,res) => {
   )
   .then(result => {
     let passId = result.rows[0].id
-
-    let guestResults = Promise.all(
-      passentry.guests.map((guest) =>{
-        return db.query(
-          `
-          INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id)
-          VALUES($1::text, $2::text, $3::integer, $4::integer)
-          RETURNING *
-          `,[guest.firstName, guest.lastName, guest.phone, Number(passId)]
-        )
-        .then(result => result.rows[0])
+    if (!passentry.guests) {
+      return res.status(200).send(true)
+    } else {
+      console.log('guests')
+      let guestResults = Promise.all(
+        passentry.guests.map((guest) =>{
+          return db.query(
+            `
+            INSERT INTO guests (guests_first_name, guests_last_name, guests_phone, entry_id)
+            VALUES($1::text, $2::text, $3::text, $4::integer)
+            RETURNING *
+            `,[guest.firstName, guest.lastName, guest.phone, Number(passId)]
+          )
+          .then(result => result.rows[0])
+        })
+      )
+      return Promise.all([result.rows[0], guestResults])
+      .then(([passEntry, guestResults]) => {
+        passEntry.guests = guestResults
+        res.status(200).json(passEntry)
       })
-    )
-    return Promise.all([result.rows[0], guestResults])
+      .catch(err => {
+        console.log('error=>>>>>', err)
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+    }
   })
-  .then(([passEntry, guestResults]) => {
-    passEntry.guests = guestResults
-    res.status(200).json(passEntry)
-  })
-  .catch(err => {
-    res
-      .status(500)
-      .json({ error: err.message });
-  });
 });
 
 

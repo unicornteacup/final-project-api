@@ -19,7 +19,7 @@ module.exports = db => {
       FROM pass_entries 
       WHERE trail_id = $1
       AND date = $2
-      ;`, [req.body.trail, req.body.date])
+      ;`, [1, date])
       .then(result => {
         res.status(200).json({entries: result.rows});
       })

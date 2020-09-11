@@ -51,6 +51,7 @@ const updateEntry = (db, status, id) => new Promise((resolve, reject) => {
         });
       })
       .catch(err => {
+        console.log(err)
         reject({ error: err })
       });
   })
